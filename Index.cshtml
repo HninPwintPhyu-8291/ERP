@@ -1,0 +1,59 @@
+﻿@using BCErp.DTO
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>ItemClass Listing</h2>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        User
+        <a class="btn btn-sm btn-default" href="@Url.Action("Create","ItemClass")" style="float:right;margin-top:-5px;">Create</a>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td style="width: 40px"></td>
+                    <td style="text-align:center">No</td>
+                    <td style="text-align:center">Code</td>
+                    <td style="text-align:center">Name</td>
+                    <td style="text-align:center">Active</td>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+
+                    List<ItemClassDTO> itemClassDTOs = (List<ItemClassDTO>)ViewBag.ItemClassList;
+
+                    int no = 0;
+                    string editAction = "";
+                    for (int i = 0; i < itemClassDTOs.Count; i++)
+                    {
+                        no = i + 1;
+                        editAction = "Edit/" + itemClassDTOs[i].Id;
+                        <tr>
+                            <td style="text-align:center">
+                                <a class="btn btn-sm btn-warning" href='@Url.Action(editAction,"ItemClass")'><span class="glyphicon glyphicon-pencil"></span></a>
+                            </td>
+                            <td style="text-align:center">@no</td>
+                            <td style="text-align:center">@itemClassDTOs[i].Code</td>
+                            <td>@itemClassDTOs[i].Name</td>
+                            <td style="text-align:center">
+                                @if (itemClassDTOs[i].Active)
+                                {
+                                    <input type="checkbox" disabled checked />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" disabled />
+                                }
+
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
